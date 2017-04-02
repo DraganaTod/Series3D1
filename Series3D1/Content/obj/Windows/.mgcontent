@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/US_Canyon.png</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurTexture.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurHeightMap.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/mntn_canyon_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_mntn2_h.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_sand_big_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/adesert_mntn_d.jpg</File>
+  </SourceFiles>
+</SourceFileCollection>
