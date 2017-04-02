@@ -56,10 +56,10 @@ namespace Series3D1
 
             //ändra till false om man vill se trianglarna
             basicEffect.TextureEnabled = true;
-            //draw those triangles
-            //RasterizerState state = new RasterizerState();
-            //state.FillMode = FillMode.WireFrame;
-            //graphicsDevice.RasterizerState = state;
+           //// draw those triangles
+           // RasterizerState state = new RasterizerState();
+           // state.FillMode = FillMode.WireFrame;
+           // graphicsDevice.RasterizerState = state;
 
         }
 

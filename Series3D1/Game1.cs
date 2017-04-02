@@ -56,7 +56,7 @@ namespace Series3D1
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //load heightMap and heightMapTexture to create landscape
-            landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("adesert_mntn_d"));
+            landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_white_d"));
         }
 
         /// <summary>

@@ -30,3 +30,4 @@ C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\W
 C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\desert_mntn2_h.xnb
 C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\desert_sand_big_d.xnb
 C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\adesert_mntn_d.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\mntn_white_d.xnb

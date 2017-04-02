@@ -97,3 +97,15 @@
 /processorParam:TextureFormat=Color
 /build:adesert_mntn_d.jpg
 
+#begin mntn_white_d.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mntn_white_d.jpg
+
