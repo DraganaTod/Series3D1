@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-using Microsoft.Xna.Framework.Storage;
-
 namespace Series3D1
 {
     class Terrain

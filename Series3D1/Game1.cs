@@ -5,9 +5,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Series3D1
 {
-    /// <summary>
-    /// This is the main type for your game.
-    /// </summary>
+   // bigprop = 0
+   //body = 1
+   //litleprop 2
     public class Game1 : Game
     {
          GraphicsDeviceManager graphics;
@@ -19,6 +19,7 @@ namespace Series3D1
 
         //-------------TERRAIN-----------------
         Terrain landscape;
+        Vector3 rotation;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -33,7 +34,7 @@ namespace Series3D1
             graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
-            Window.Title = "Test number uno :) ";
+            Window.Title = "Test numero uno :) ";
             // initialize camera start position
             camera = new Camera(new Vector3(-100, 0, 0), Vector3.Zero, new Vector3(2, 2, 2), new Vector3(0, -100, 256));
 
@@ -49,6 +50,7 @@ namespace Series3D1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            rotation = Vector3.Zero;
             //load heightMap and heightMapTexture to create landscape
             landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_white_d"));
             model = Content.Load<Model>("Chopper");
@@ -75,6 +77,15 @@ namespace Series3D1
         
         protected override void Update(GameTime gameTime)
         {
+            //rotera stora propellern
+            rotation.Y += 0.6f;
+            model.Bones[1].Transform = Matrix.CreateTranslation(model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(rotation.Y);
+            rotation.X += .1f;
+            rotation.Z += .1f;
+            model.Bones[0].Transform = Matrix.CreateTranslation(model.Bones[0].Transform.Translation);
+            model.Bones[3].Transform = Matrix.CreateRotationX(rotation.X)* Matrix.CreateTranslation(model.Bones[3].Transform.Translation);
+
+
             // move camera position with keyboard
             KeyboardState key = Keyboard.GetState();
             if (key.IsKeyDown(Keys.A))
@@ -124,10 +135,12 @@ namespace Series3D1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+           
             //by the book
             float radius = GetMaxMeshRadius(model);
             Matrix proj = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1.0f, 100.0f);
-            Matrix view = Matrix.CreateLookAt(new Vector3(2, 3, 4), Vector3.Zero, Vector3.Up);
+         
+            Matrix view = Matrix.CreateLookAt(new Vector3(-1, 1, 5), Vector3.Zero, Vector3.Up);
             
             // to get landscape viewable
             camera.Draw(landscape);
