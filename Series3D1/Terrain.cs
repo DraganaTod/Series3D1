@@ -53,13 +53,14 @@ namespace Series3D1
         {
             basicEffect = new BasicEffect(graphicsDevice);
             basicEffect.Texture = heightMapTexture;
+            basicEffect.FogEnabled = false;
 
             //ändra till false om man vill se trianglarna
-            basicEffect.TextureEnabled = true;
-           //// draw those triangles
-           // RasterizerState state = new RasterizerState();
-           // state.FillMode = FillMode.WireFrame;
-           // graphicsDevice.RasterizerState = state;
+            basicEffect.TextureEnabled =true;
+            //// draw those triangles
+            //RasterizerState state = new RasterizerState();
+            //state.FillMode = FillMode.WireFrame;
+            //graphicsDevice.RasterizerState = state;
 
         }
 

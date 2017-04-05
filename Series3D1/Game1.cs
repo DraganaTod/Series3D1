@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +12,7 @@ namespace Series3D1
     {
          GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Model model;
 
         //-------------CAMERA------------------
         Camera camera;
@@ -23,17 +25,12 @@ namespace Series3D1
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
+  
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = 1200;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Test number uno :) ";
@@ -46,10 +43,7 @@ namespace Series3D1
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+        
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -57,22 +51,28 @@ namespace Series3D1
 
             //load heightMap and heightMapTexture to create landscape
             landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_white_d"));
+            model = Content.Load<Model>("Chopper");
+            foreach(ModelMesh mm in model.Meshes)
+            {
+                foreach(Effect e in mm.Effects)
+                {
+                    IEffectLights ieLight = e as IEffectLights;
+                    if(ieLight != null)
+                    {
+                        ieLight.EnableDefaultLighting();
+                    }
+
+                }
+            }
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
+     
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        
         protected override void Update(GameTime gameTime)
         {
             // move camera position with keyboard
@@ -120,17 +120,66 @@ namespace Series3D1
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+      
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            //by the book
+            float radius = GetMaxMeshRadius(model);
+            Matrix proj = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, GraphicsDevice.Viewport.AspectRatio, 1.0f, 100.0f);
+            Matrix view = Matrix.CreateLookAt(new Vector3(2, 3, 4), Vector3.Zero, Vector3.Up);
+            
             // to get landscape viewable
             camera.Draw(landscape);
-
+            DrawModel(model, radius, proj, view);
             base.Draw(gameTime);
+        }
+        //by the book
+        private void DrawModelViaMeshes(Model m, float radius, Matrix proj, Matrix view)
+        {
+            Matrix world = Matrix.CreateScale(1.0f / radius);
+            foreach(ModelMesh mesh in model.Meshes)
+            {
+                foreach(Effect e in mesh.Effects)
+                {
+                    IEffectMatrices iEffectMatrices = e as IEffectMatrices;
+                    if(iEffectMatrices != null)
+                    {
+                        iEffectMatrices.World = GetParentTransform(m, mesh.ParentBone) * world;
+                        iEffectMatrices.Projection = proj;
+                        iEffectMatrices.View = view;
+                    }
+                }
+                mesh.Draw();
+
+            }
+        }
+
+        //by the book
+        //Combine bones transform with all of its parents. It stops when it gets to the root bone
+        //because it has no parent and simply return the root bone's transform
+        private Matrix GetParentTransform(Model m, ModelBone mb)
+        {
+            return (mb == m.Root) ? mb.Transform :
+                mb.Transform * GetParentTransform(m, mb.Parent);
+        }
+
+        private void DrawModel(Model m, float radius, Matrix proj, Matrix view)
+        {
+            m.Draw(Matrix.CreateScale(1.0f / radius), view, proj);
+        }
+        //by the book
+        private float GetMaxMeshRadius(Model m)
+        {
+            float radius = 0.0f;
+            foreach(ModelMesh mesh in m.Meshes)
+            {
+                if(mesh.BoundingSphere.Radius > radius)
+                {
+                    radius = mesh.BoundingSphere.Radius;
+                }
+            }
+            return radius;
         }
     }
 }
