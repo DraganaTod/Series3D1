@@ -52,7 +52,7 @@ namespace Series3D1
 
             rotation = Vector3.Zero;
             //load heightMap and heightMapTexture to create landscape
-            landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_white_d"));
+            landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("snow1_s"));
             model = Content.Load<Model>("Chopper");
             foreach(ModelMesh mm in model.Meshes)
             {
@@ -78,14 +78,16 @@ namespace Series3D1
         protected override void Update(GameTime gameTime)
         {
             //rotera stora propellern
-            rotation.Y += 0.6f;
+            rotation.Y += .6f;
+           // rotation.Y += .1f;
             model.Bones[1].Transform = Matrix.CreateTranslation(model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(rotation.Y);
             rotation.X += .1f;
+           
             rotation.Z += .1f;
             model.Bones[0].Transform = Matrix.CreateTranslation(model.Bones[0].Transform.Translation);
-            model.Bones[3].Transform = Matrix.CreateRotationX(rotation.X)* Matrix.CreateTranslation(model.Bones[3].Transform.Translation);
-
-
+            // model.Bones[3].Transform = Matrix.CreateRotationX(rotation.X) * Matrix.CreateTranslation(model.Bones[3].Transform.Translation);
+            //model.Bones[3].Transform = Matrix.Negate(model.Bones[3].Transform)* Matrix.CreateFromYawPitchRoll(5f, 0, 0);//  * Matrix.Negate(model.Bones[3].Transform) ;// * Matrix.Negate(model.Bones[3].Transform);
+            model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * model.Bones[3].Transform;
             // move camera position with keyboard
             KeyboardState key = Keyboard.GetState();
             if (key.IsKeyDown(Keys.A))

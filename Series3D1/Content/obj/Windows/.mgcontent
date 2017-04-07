@@ -4,14 +4,24 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/US_Canyon.png</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/OurTexture.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/OurHeightMap.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/mntn_canyon_d.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/desert_mntn2_h.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/desert_sand_big_d.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/adesert_mntn_d.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/mntn_white_d.jpg</File>
-    <File>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/Chopper.fbx</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/US_Canyon.png</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurTexture.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurHeightMap.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/mntn_canyon_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_mntn2_h.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_sand_big_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/adesert_mntn_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/mntn_white_d.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/Chopper.fbx</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_sand_big_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/snow1_n.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/snow1_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_cracksv_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_mntn_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/ground_dry_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/jungle_mntn2_s.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/texture.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/Patagonia.jpg</File>
+    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/blahajpg.jpg</File>
   </SourceFiles>
 </SourceFileCollection>

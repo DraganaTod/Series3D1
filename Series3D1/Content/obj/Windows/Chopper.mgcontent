@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/Chopper.fbx</SourceFile>
-  <SourceTime>2017-04-05T11:48:33.726586+02:00</SourceTime>
-  <DestFile>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/bin/Windows/Chopper.xnb</DestFile>
-  <DestTime>2017-04-05T11:50:12.4280035+02:00</DestTime>
+  <SourceFile>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/Chopper.fbx</SourceFile>
+  <SourceTime>2017-03-29T06:14:48+02:00</SourceTime>
+  <DestFile>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/bin/Windows/Chopper.xnb</DestFile>
+  <DestTime>2017-04-06T10:29:23.1603594+02:00</DestTime>
   <Importer>FbxImporter</Importer>
-  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
+  <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
   <Processor>ModelProcessor</Processor>
-  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
+  <ProcessorTime>2016-03-30T08:36:08+02:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>0,0,0,0</Value>

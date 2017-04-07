@@ -64,3 +64,13 @@ C:\Users\Dragana\Source\Repos\Series3D12\Series3D1\bin\Windows\x86\Debug\SharpDX
 C:\Users\Dragana\Source\Repos\Series3D12\Series3D1\bin\Windows\x86\Debug\SharpDX.XInput.xml
 C:\Users\Dragana\Source\Repos\Series3D12\Series3D1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Dragana\Source\Repos\Series3D12\Series3D1\obj\x86\Debug\Series3D1.csprojResolveAssemblyReference.cache
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\desert_sand_big_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\snow1_n.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\snow1_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\desert_cracksv_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\desert_mntn_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\ground_dry_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\jungle_mntn2_s.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\texture.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\Patagonia.xnb
+C:\Users\Dragana\documents\visual studio 2015\Projects\Series3D1\Series3D1\bin\Windows\x86\Debug\Content\blahajpg.xnb

@@ -52,6 +52,7 @@ namespace Series3D1
             basicEffect = new BasicEffect(graphicsDevice);
             basicEffect.Texture = heightMapTexture;
             basicEffect.FogEnabled = false;
+            
 
             //ändra till false om man vill se trianglarna
             basicEffect.TextureEnabled =true;
