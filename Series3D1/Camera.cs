@@ -10,7 +10,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-using Microsoft.Xna.Framework.Storage;
 namespace Series3D1
 {
     class Camera
@@ -69,7 +68,7 @@ namespace Series3D1
             {
                 tempMovement.Y = +movement.Y;
             }
-            //backward/zoom put
+            //backward/zoom out
             if(number == 5)
             {
                 tempMovement.Z = -movement.Z;
@@ -114,21 +113,14 @@ namespace Series3D1
         }
         public void Draw(Terrain terrain)
         {
-            // terrain.basicEffect.Begin();
             terrain.basicEffect.CurrentTechnique.Passes[0].Apply();
             SetEffects(terrain.basicEffect);
             terrain.Draw();
             foreach (EffectPass pass in terrain.basicEffect.CurrentTechnique.Passes)
             {
-
-                //pass.Begin();
                 pass.Apply();
                 terrain.Draw();
-
-
-                // pass.End();
             }
-            ////terrain.basicEffect.End();
         }
     }
 }
