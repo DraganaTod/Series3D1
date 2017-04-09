@@ -1,6 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Series3D1.Managers;
+using Series3D1.Entities;
+using Series3D1.Components;
+using Series3D1.Systems;
+using System.Collections.Generic;
 
 namespace Series3D1
 {
@@ -55,10 +60,47 @@ namespace Series3D1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            
             //load heightMap and heightMapTexture to create landscape
             landscape.SetHeightMapData(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("adesert_mntn_d"));
-        }
+            AddEntitiesAndComponents();
+            
+            foreach (ModelMesh mm in model.Meshes)
+            {
+                foreach (Effect e in mm.Effects)
+                {
+                    IEffectLights ieLight = e as IEffectLights;
+                    if (ieLight != null)
+                    {
+                        ieLight.EnableDefaultLighting();
+                    }
 
+                }
+            }
+
+        }
+        public void AddEntitiesAndComponents()
+        {
+            Entity chopper = new Entity();
+            SceneManager.Instance.AddEntityToScene("Game", chopper);
+            ComponentManager.Instance.AddComponentToEntity(chopper, new TagComponent("chopper"));
+            ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("chopper")));
+
+            Entity camera = new Entity();
+            Vector3 pos = new Vector3(-100, 0, 0);
+            SceneManager.Instance.AddEntityToScene("Game", camera);
+            ComponentManager.Instance.AddComponentToEntity(camera, new TagComponent("camera"));
+            ComponentManager.Instance.AddComponentToEntity(camera, new CameraComponent(new Vector3(2, 2, 2), 
+                Matrix.CreateLookAt(new Vector3(-100, 0, 0), Vector3.Zero, Vector3.Up), Matrix.CreatePerspective(1.2f, 0.9f, 1.0f, 1000.0f)));
+            ComponentManager.Instance.AddComponentToEntity(camera, new InputComponent(new List<int>()));
+            ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent(pos, new Vector3(), new Vector3()));
+
+            Entity heightmap = new Entity();
+            SceneManager.Instance.AddEntityToScene("Game", heightmap);
+            ComponentManager.Instance.AddComponentToEntity(heightmap, new TagComponent("heightmap"));
+            ComponentManager.Instance.AddComponentToEntity(heightmap, new HeightmapComponent(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("snow1_s"), ))
+
+        }
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
         /// game-specific content.

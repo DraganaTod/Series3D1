@@ -4,12 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/US_Canyon.png</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurTexture.jpg</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/OurHeightMap.jpg</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/mntn_canyon_d.jpg</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_mntn2_h.jpg</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/desert_sand_big_d.jpg</File>
-    <File>C:/Users/Dragana/documents/visual studio 2015/Projects/Series3D1/Series3D1/Content/adesert_mntn_d.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/US_Canyon.png</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/OurTexture.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/OurHeightMap.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/mntn_canyon_d.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/desert_mntn2_h.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/desert_sand_big_d.jpg</File>
+    <File>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/adesert_mntn_d.jpg</File>
   </SourceFiles>
 </SourceFileCollection>

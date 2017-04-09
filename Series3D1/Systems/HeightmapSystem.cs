@@ -1,60 +1,34 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
+using System.Threading.Tasks;
+using Series3D1.Components;
+using Series3D1.Managers;
+using Series3D1.Entities;
 
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-
-namespace Series3D1
+namespace Series3D1.Systems
 {
-    class Terrain
+    class HeightmapSystem : ILoadContent, IDraw
     {
-        GraphicsDevice graphicsDevice;
 
         //heithMap
-        Texture2D heightMap;
-        Texture2D heightMapTexture;
-        VertexPositionTexture[] vertices;
-        int width;
-        int height;
-
-        public BasicEffect basicEffect;
-        int[] indices;
-
         //array to read heightMap data
         float[,] heightMapData;
 
-        public Terrain(GraphicsDevice graphicsDevice)
-        {
-            this.graphicsDevice = graphicsDevice;
-        }
-
         //method for getting out textures
-        public void SetHeightMapData(Texture2D heightMap, Texture2D heightMapTexture)
-        {
-            this.heightMap = heightMap;
-            this.heightMapTexture = heightMapTexture;
-            width = heightMap.Width;
-            height = heightMap.Height;
-            SetHeights();
-            SetVertices();
-            SetIndices();
-            SetEffects();
-        }
-
         private void SetEffects()
         {
             basicEffect = new BasicEffect(graphicsDevice);
             basicEffect.Texture = heightMapTexture;
+            basicEffect.FogEnabled = false;
+
 
             //ändra till false om man vill se trianglarna
             basicEffect.TextureEnabled = true;
-            //draw those triangles
+            //// draw those triangles
             //RasterizerState state = new RasterizerState();
             //state.FillMode = FillMode.WireFrame;
             //graphicsDevice.RasterizerState = state;
@@ -64,7 +38,7 @@ namespace Series3D1
         private void SetIndices()
         {
             // amount of triangles
-            
+
             indices = new int[6 * (width - 1) * (height - 1)];
             int number = 0;
             // collect data for corners
@@ -93,15 +67,10 @@ namespace Series3D1
                     texturePosition = new Vector2((float)x / 25.5f, (float)y / 25.5f);
                     vertices[x + y * width] = new VertexPositionTexture(new Vector3(x, heightMapData[x, y], -y), texturePosition);
                 }
-                
-               // graphicsDevice.VertexDeclaration = new VertexDeclaration(graphicsDevice, VertexPositionTexture.VertexElements);
+
+                // graphicsDevice.VertexDeclaration = new VertexDeclaration(graphicsDevice, VertexPositionTexture.VertexElements);
             }
         }
-        public void Draw()
-        {
-            graphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
-        }
-
         public void SetHeights()
         {
             Color[] greyValues = new Color[width * height];
@@ -117,5 +86,17 @@ namespace Series3D1
             }
         }
 
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
+        }
+
+        public void LoadContent()
+        {
+            SetHeights();
+            SetVertices();
+            SetIndices();
+            SetEffects();
+        }
     }
 }
