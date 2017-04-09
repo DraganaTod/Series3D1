@@ -16,18 +16,16 @@ namespace Series3D1.Systems
 
         //heithMap
         //array to read heightMap data
-        float[,] heightMapData;
+        
 
         //method for getting out textures
-        private void SetEffects()
+        private void SetEffects(HeightmapComponent hmComp)
         {
-            basicEffect = new BasicEffect(graphicsDevice);
-            basicEffect.Texture = heightMapTexture;
-            basicEffect.FogEnabled = false;
-
+            hmComp.Effect.Texture = hmComp.HeightMapTexture;
+            hmComp.Effect.FogEnabled = false;
 
             //ändra till false om man vill se trianglarna
-            basicEffect.TextureEnabled = true;
+            hmComp.Effect.TextureEnabled = true;
             //// draw those triangles
             //RasterizerState state = new RasterizerState();
             //state.FillMode = FillMode.WireFrame;
@@ -35,68 +33,90 @@ namespace Series3D1.Systems
 
         }
 
-        private void SetIndices()
+        private void SetIndices(HeightmapComponent hmComp)
         {
             // amount of triangles
-
-            indices = new int[6 * (width - 1) * (height - 1)];
+            hmComp.Indices = new int[6 * (hmComp.Width - 1) * (hmComp.Height - 1)];
             int number = 0;
             // collect data for corners
-            for (int y = 0; y < height - 1; y++)
-                for (int x = 0; x < width - 1; x++)
+            for (int y = 0; y < hmComp.Height - 1; y++)
+                for (int x = 0; x < hmComp.Width - 1; x++)
                 {
                     // create double triangles
-                    indices[number] = x + (y + 1) * width;      // up left
-                    indices[number + 1] = x + y * width + 1;        // down right
-                    indices[number + 2] = x + y * width;            // down left
-                    indices[number + 3] = x + (y + 1) * width;      // up left
-                    indices[number + 4] = x + (y + 1) * width + 1;  // up right
-                    indices[number + 5] = x + y * width + 1;        // down right
+                    hmComp.Indices[number] = x + (y + 1) * hmComp.Width;      // up left
+                    hmComp.Indices[number + 1] = x + y * hmComp.Width + 1;        // down right
+                    hmComp.Indices[number + 2] = x + y * hmComp.Width;            // down left
+                    hmComp.Indices[number + 3] = x + (y + 1) * hmComp.Width;      // up left
+                    hmComp.Indices[number + 4] = x + (y + 1) * hmComp.Width + 1;  // up right
+                    hmComp.Indices[number + 5] = x + y * hmComp.Width + 1;        // down right
                     number += 6;
                 }
         }
 
-        private void SetVertices()
+        private void SetVertices(HeightmapComponent hmComp)
         {
-            vertices = new VertexPositionTexture[width * height];
+            hmComp.Vertices = new VertexPositionTexture[hmComp.Width * hmComp.Height];
             Vector2 texturePosition;
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < hmComp.Width; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < hmComp.Height; y++)
                 {
                     texturePosition = new Vector2((float)x / 25.5f, (float)y / 25.5f);
-                    vertices[x + y * width] = new VertexPositionTexture(new Vector3(x, heightMapData[x, y], -y), texturePosition);
+                    hmComp.Vertices[x + y * hmComp.Width] = new VertexPositionTexture(new Vector3(x, hmComp.heightMapData[x, y], -y), texturePosition);
                 }
 
                 // graphicsDevice.VertexDeclaration = new VertexDeclaration(graphicsDevice, VertexPositionTexture.VertexElements);
             }
         }
-        public void SetHeights()
+        public void SetHeights(HeightmapComponent hmComp)
         {
-            Color[] greyValues = new Color[width * height];
-            heightMap.GetData(greyValues);
-            heightMapData = new float[width, height];
+            Color[] greyValues = new Color[hmComp.Width * hmComp.Height];
+            hmComp.HeightMap.GetData(greyValues);
+            hmComp.heightMapData = new float[hmComp.Width, hmComp.Height];
 
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < hmComp.Width; x++)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = 0; y < hmComp.Height; y++)
                 {
-                    heightMapData[x, y] = greyValues[x + y * width].G / 3.1f;
+                    hmComp.heightMapData[x, y] = greyValues[x + y * hmComp.Width].G / 3.1f;
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, vertices, 0, vertices.Length, indices, 0, indices.Length / 3);
+            Entity hmEntity = ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities());
+            HeightmapComponent hmComp = ComponentManager.Instance.GetEntityComponent<HeightmapComponent>(hmEntity);
+
+            hmComp.Effect.CurrentTechnique.Passes[0].Apply();
+            SetEffects(hmComp);
+            foreach (EffectPass pass in hmComp.Effect.CurrentTechnique.Passes)
+            {
+
+                //pass.Begin();
+                pass.Apply();
+                spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, hmComp.Vertices, 0, hmComp.Vertices.Length, hmComp.Indices, 0, hmComp.Indices.Length / 3);
+
+
+                // pass.End();
+            }
         }
 
         public void LoadContent()
         {
-            SetHeights();
-            SetVertices();
-            SetIndices();
-            SetEffects();
+            Entity hmEntity = ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities());
+            HeightmapComponent hmComp = ComponentManager.Instance.GetEntityComponent<HeightmapComponent>(hmEntity);
+            TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(hmEntity);
+            hmComp.World = Matrix.CreateTranslation(transComp.Position);
+            SetHeights(hmComp);
+            SetVertices(hmComp);
+            SetIndices(hmComp);
+            SetEffects(hmComp);
+        }
+
+        public int Order()
+        {
+            return 1;
         }
     }
 }

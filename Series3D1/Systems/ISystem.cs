@@ -8,5 +8,6 @@ namespace Series3D1.Systems
 {
     public interface ISystem
     {
+        int Order();
     }
 }

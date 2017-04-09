@@ -34,6 +34,19 @@ namespace Series3D1.Managers
             components[type][entity] = component;
         }
 
+        public List<Entity> GetAllEntitiesWithCertainComp<T>() where T : class, IComponent
+        {
+            List<Entity> temp = new List<Entity>();
+            Type type = typeof(T);
+            if (!components.ContainsKey(type))
+                return null;
+            foreach(KeyValuePair<Entity, IComponent> pair in components[type])
+            {
+                temp.Add(pair.Key);
+            }
+            return temp;
+        }
+
         public T GetEntityComponent<T>(Entity entity) where T : class, IComponent
         {
             Type type = typeof(T);
@@ -43,7 +56,7 @@ namespace Series3D1.Managers
                 return (T)components[type][entity];
             return null;
         }
-        public IEnumerable<T> GetAllSpecComponents<T>() where T : class, IComponent
+        public List<T> GetAllSpecComponents<T>() where T : class, IComponent
         {
             List<T> temp = new List<T>();
             Type type = typeof(T);

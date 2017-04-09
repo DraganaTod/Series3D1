@@ -42,7 +42,6 @@
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\HeightmapComponent.cs" />
     <Compile Include="Components\IComponent.cs" />
-    <Compile Include="Components\InputComponent.cs" />
     <Compile Include="Components\ModelComponent.cs" />
     <Compile Include="Components\TagComponent.cs" />
     <Compile Include="Components\TransformComponent.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\IUpdate.cs" />
     <Compile Include="Systems\ModelSystem.cs" />
-    <Compile Include="Systems\RenderSystem.cs" />
     <Compile Include="Systems\TransformSystem.cs" />
     <Compile Include="Terrain.cs" />
   </ItemGroup>

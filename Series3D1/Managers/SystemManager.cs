@@ -13,6 +13,7 @@ namespace Series3D1.Managers
     {
         Dictionary<string, Dictionary<Type, ISystem>> IDrawDict = new Dictionary<string, Dictionary<Type, ISystem>>();
         Dictionary<string, Dictionary<Type, ISystem>> IUpdateDict = new Dictionary<string, Dictionary<Type, ISystem>>();
+        Dictionary<string, Dictionary<Type, ISystem>> ILoadContentDict = new Dictionary<string, Dictionary<Type, ISystem>>();
 
         public string ActiveCategory { get; set; }
 
@@ -31,13 +32,14 @@ namespace Series3D1.Managers
 
         public void RegisterSystem(string category, ISystem system)
         {
-            if (system is Systems.IDrawable)
+            if (system is IDraw)
             {
                 if (!IDrawDict.ContainsKey(category))
                 {
                     IDrawDict.Add(category, new Dictionary<Type, ISystem>());
                 }
                 IDrawDict[category].Add(system.GetType(), system);
+                IDrawDict[category].OrderBy(pair => pair.Value.Order());
             }
 
             if (system is IUpdate)
@@ -48,15 +50,34 @@ namespace Series3D1.Managers
                 }
                 IUpdateDict[category].Add(system.GetType(), system);
             }
+            if (system is ILoadContent)
+            {
+                if (!ILoadContentDict.ContainsKey(category))
+                {
+                    ILoadContentDict.Add(category, new Dictionary<Type, ISystem>());
+                }
+                ILoadContentDict[category].Add(system.GetType(), system);
+            }
         }
 
-        public void RunRenderSystems(SpriteBatch spriteBatch, GameTime gameTime)
+        public void RunLoadContentSystems()
+        {
+            if (IUpdateDict.ContainsKey(ActiveCategory))
+            {
+                foreach (ILoadContent loadContentSys in ILoadContentDict[ActiveCategory].Values)
+                {
+                    loadContentSys.LoadContent();
+                }
+            }
+        }
+
+        public void RunDrawSystems(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (IDrawDict.ContainsKey(ActiveCategory))
             {
-                foreach (Systems.IDrawable rensys in IDrawDict[ActiveCategory].Values)
+                foreach (IDraw drawsys in IDrawDict[ActiveCategory].Values)
                 {
-                    rensys.Draw(spriteBatch, gameTime);
+                    drawsys.Draw(spriteBatch, gameTime);
                 }
             }
         }

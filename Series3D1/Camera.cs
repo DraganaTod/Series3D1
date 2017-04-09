@@ -113,21 +113,14 @@ namespace Series3D1
         }
         public void Draw(Terrain terrain)
         {
-            // terrain.basicEffect.Begin();
             terrain.basicEffect.CurrentTechnique.Passes[0].Apply();
             SetEffects(terrain.basicEffect);
             terrain.Draw();
             foreach (EffectPass pass in terrain.basicEffect.CurrentTechnique.Passes)
             {
-
-                //pass.Begin();
                 pass.Apply();
                 terrain.Draw();
-
-
-                // pass.End();
             }
-            ////terrain.basicEffect.End();
         }
     }
 }
