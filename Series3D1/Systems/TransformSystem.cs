@@ -31,13 +31,14 @@ namespace Series3D1.Systems
             {
                 ModelComponent modelComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ent);
                 TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
-
+                transComp.Rotation = new Vector3(0, transComp.Rotation.Y + .6f, 0);
                 //kroppen
                 modelComp.Model.Bones[0].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[0].Transform.Translation);
                 //rotera stora propellern
                 modelComp.Model.Bones[1].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(transComp.Rotation.Y);
                 //lilla
-                modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(transComp.Rotation.Y, 0, 0) * modelComp.Model.Bones[3].Transform;
+                modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * modelComp.Model.Bones[3].Transform;
+                
             }
             //foreach(Entity ent in entities)
             //{
