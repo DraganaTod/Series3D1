@@ -32,8 +32,8 @@ namespace Series3D1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            graphics.PreferredBackBufferWidth = 1200;
-            graphics.PreferredBackBufferHeight = 800;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 600;
             graphics.IsFullScreen = false;
             graphics.ApplyChanges();
             Window.Title = "Test number uno :) ";
@@ -79,7 +79,7 @@ namespace Series3D1
             Entity heightmap = new Entity();
             SceneManager.Instance.AddEntityToScene("game", heightmap);
             ComponentManager.Instance.AddComponentToEntity(heightmap, new TagComponent("heightmap"));
-            ComponentManager.Instance.AddComponentToEntity(heightmap, new HeightmapComponent(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("snow1_s"), graphics.GraphicsDevice));
+            ComponentManager.Instance.AddComponentToEntity(heightmap, new HeightmapComponent(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_canyon_d"), graphics.GraphicsDevice));
             ComponentManager.Instance.AddComponentToEntity(heightmap, new TransformComponent(new Vector3(0, -100, 256), new Vector3(), new Vector3()));
             SceneManager.Instance.ActiveScene = "game";
             SystemManager.Instance.ActiveCategory = "game";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/desert_sand_big_d.jpg</SourceFile>
-  <SourceTime>2017-04-04T18:18:45.7005254+02:00</SourceTime>
-  <DestFile>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/bin/Windows/desert_sand_big_d.xnb</DestFile>
-  <DestTime>2017-04-07T16:09:31.9516147+02:00</DestTime>
+  <SourceFile>C:/Users/Dragana/Source/Repos/Series3D13/Series3D1/Content/desert_sand_big_d.jpg</SourceFile>
+  <SourceTime>2017-04-17T11:00:37.6081461+02:00</SourceTime>
+  <DestFile>C:/Users/Dragana/Source/Repos/Series3D13/Series3D1/Content/bin/Windows/desert_sand_big_d.xnb</DestFile>
+  <DestTime>2017-04-17T11:20:16.5733536+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
