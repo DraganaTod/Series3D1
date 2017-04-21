@@ -65,7 +65,7 @@ namespace Series3D1
             Entity chopper = new Entity();
             SceneManager.Instance.AddEntityToScene("game", chopper);
             ComponentManager.Instance.AddComponentToEntity(chopper, new TagComponent("chopper"));
-            ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper")));
+            ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper"), graphics.GraphicsDevice));
             ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(), Vector3.Zero, new Vector3()));
 
             Entity camera = new Entity();
@@ -102,6 +102,7 @@ namespace Series3D1
         protected override void Update(GameTime gameTime)
         {
             SystemManager.Instance.RunUpdateSystems(gameTime);
+            
             base.Update(gameTime);
         }
 

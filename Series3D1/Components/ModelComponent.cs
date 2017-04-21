@@ -16,9 +16,10 @@ namespace Series3D1.Components
         public Model Model { get; set; }
         public BasicEffect Effect { get; set; }
 
-        public ModelComponent(Model model)
+        public ModelComponent(Model model, GraphicsDevice gd)
         {
             Model = model;
+            Effect = new BasicEffect(gd);
             
         }
         
