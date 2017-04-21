@@ -13,10 +13,11 @@ namespace Series3D1.Systems
 {
     class ModelSystem : IDraw, ILoadContent
     {
+        ModelComponent modComp;
         public void LoadContent()
         {
             Entity modEntity = ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities());
-            ModelComponent modComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(modEntity);
+             modComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(modEntity);
             foreach (ModelMesh mm in modComp.Model.Meshes)
             {
                 foreach (Effect e in mm.Effects)
@@ -31,36 +32,36 @@ namespace Series3D1.Systems
             }
         }
 
-        private void DrawModelViaMeshes(Model m, float radius, Matrix proj, Matrix view)
-        {
-            Matrix world = Matrix.CreateScale(1.0f / radius);
-            foreach (ModelMesh mesh in m.Meshes)
-            {
-                foreach (Effect e in mesh.Effects)
-                {
-                    IEffectMatrices iEffectMatrices = e as IEffectMatrices;
-                    if (iEffectMatrices != null)
-                    {
-                        iEffectMatrices.World = GetParentTransform(m, mesh.ParentBone) * world;
-                        iEffectMatrices.Projection = proj;
-                        iEffectMatrices.View = view;
-                    }
-                }
-                mesh.Draw();
+        //private void DrawModelViaMeshes(Model m, float radius, Matrix proj, Matrix view)
+        //{
+        //    Matrix world = Matrix.CreateScale(1.0f / radius);
+        //    foreach (ModelMesh mesh in m.Meshes)
+        //    {
+        //        foreach (Effect e in mesh.Effects)
+        //        {
+        //            IEffectMatrices iEffectMatrices = e as IEffectMatrices;
+        //            if (iEffectMatrices != null)
+        //            {
+        //                iEffectMatrices.World = GetParentTransform(m, mesh.ParentBone) * world;
+        //                iEffectMatrices.Projection = proj;
+        //                iEffectMatrices.View = view;
+        //            }
+        //        }
+        //        mesh.Draw();
 
-            }
-        }
+        //    }
+        //}
 
-        private Matrix GetParentTransform(Model m, ModelBone mb)
+        private Matrix GetParentTransform(ModelComponent m, ModelBone mb)
         {
-            return (mb == m.Root) ? mb.Transform :
+            return (mb == m.Model.Root) ? mb.Transform :
                 mb.Transform * GetParentTransform(m, mb.Parent);
         }
 
-        private void DrawModel(Model m, float radius, Matrix proj, Matrix view)
-        {
-            m.Draw(Matrix.CreateScale(1.0f / radius), view, proj);
-        }
+        //private void DrawModel(Model m, float radius, Matrix proj, Matrix view)
+        //{
+        //    m.Draw(Matrix.CreateScale(1.0f / radius), view, proj);
+        //}
         //by the book
         private float GetMaxMeshRadius(Model m)
         {
@@ -74,26 +75,57 @@ namespace Series3D1.Systems
             }
             return radius;
         }
-
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void DrawModel(ModelComponent mc, GameTime gameTime, SpriteBatch spriteBatch)
         {
-            Entity modEntity = ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities());
-            ModelComponent modComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(modEntity);
+            Matrix world = Matrix.CreateScale(0.0005f, 0.0005f, 0.0005f) * Matrix.CreateRotationY(MathHelper.Pi) * Matrix.CreateFromQuaternion(mc.chopperRotation) * Matrix.CreateTranslation(mc.chopperPosition);
 
-            spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
-            //by the book
-            float radius = GetMaxMeshRadius(modComp.Model);
-            Matrix proj = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, spriteBatch.GraphicsDevice.Viewport.AspectRatio, 1.0f, 100.0f);
-
+            Matrix[] chopperTransforms = new Matrix[mc.Model.Bones.Count];
+            mc.Model.CopyAbsoluteBoneTransformsTo(chopperTransforms);
+            float radius = GetMaxMeshRadius(mc.Model);
+             Matrix proj = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, spriteBatch.GraphicsDevice.Viewport.AspectRatio, 1.0f, 100.0f);
             Matrix view = Matrix.CreateLookAt(new Vector3(0, 1, 5), Vector3.Zero, Vector3.Up);
+            foreach (ModelMesh mesh in mc.Model.Meshes)
+            {
+                foreach (Effect e in mesh.Effects)
+                {
+                    IEffectMatrices iEffectMatrices = e as IEffectMatrices;
+                    if (iEffectMatrices != null)
+                    {
+                        iEffectMatrices.World = GetParentTransform(mc, mesh.ParentBone) * world;
+                        iEffectMatrices.Projection = proj;
+                        iEffectMatrices.View = view;
+                    }
+                }
+                mesh.Draw();
 
-            // to get landscape viewable
-            DrawModel(modComp.Model, radius, proj, view);
+            }
         }
+
+        //public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        //{
+            //    Entity modEntity = ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities());
+            //    ModelComponent modComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(modEntity);
+
+            //    spriteBatch.GraphicsDevice.Clear(Color.CornflowerBlue);
+            //    //by the book
+            //    float radius = GetMaxMeshRadius(modComp.Model);
+            //    Matrix proj = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, spriteBatch.GraphicsDevice.Viewport.AspectRatio, 1.0f, 100.0f);
+
+            //    Matrix view = Matrix.CreateLookAt(new Vector3(0, 1, 5), Vector3.Zero, Vector3.Up);
+
+            //    // to get landscape viewable
+            //    DrawModel(modComp.Model, radius, proj, view);
+            
+        //}
 
         public int Order()
         {
             return 2;
+        }
+
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            DrawModel(modComp, gameTime, spriteBatch);
         }
     }
 }

@@ -76,8 +76,9 @@ namespace Series3D1.Systems
             CameraComponent camcomp = ComponentManager.Instance.GetEntityComponent<CameraComponent>(ent);
              HeightmapComponent hcomp = ComponentManager.Instance.GetEntityComponent<HeightmapComponent>(ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities()));
             ModelComponent mc = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities()));
-            // SetEffects(camcomp, hcomp);
-            SetEffects(camcomp, mc);
+            SetEffects(camcomp, hcomp);
+           
+           //SetEffects(camcomp, mc);
         }
         public void SetEffects(CameraComponent camComp, HeightmapComponent hc)
         {
@@ -88,6 +89,7 @@ namespace Series3D1.Systems
         public void SetEffects(CameraComponent camComp, ModelComponent mc)
         {
             
+           
         }
 
         public int Order()
