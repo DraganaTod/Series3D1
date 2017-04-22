@@ -10,16 +10,21 @@ namespace Series3D1.Components
 {
     class ModelComponent : IComponent
     {
-        public Vector3 chopperPosition = new Vector3(8, 1, -3);
+        public Vector3 chopperPosition = new Vector3(-5, 0, 10);
         public Quaternion chopperRotation = Quaternion.Identity;
-        GraphicsDevice gd;
+        public Vector3 tempMovement = Vector3.Zero;
+        public Vector3 tempRotation = Vector3.Zero;
+        public Vector3 movement = new Vector3(2, 2, 2);
+       
+
         public Model Model { get; set; }
         public BasicEffect Effect { get; set; }
+        
 
-        public ModelComponent(Model model, GraphicsDevice gd)
+        public ModelComponent(Model model)
         {
             Model = model;
-            Effect = new BasicEffect(gd);
+           // Effect = new BasicEffect(gd);
             
         }
         

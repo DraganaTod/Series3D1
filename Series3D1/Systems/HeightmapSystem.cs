@@ -17,15 +17,19 @@ namespace Series3D1.Systems
         //heithMap
         //array to read heightMap data
         
-
+        //CameraComponent camcomp = new CameraComponent(new Vector3(2, 2, 2),
+        //        Matrix.CreateLookAt(new Vector3(-100, 0, 0), Vector3.Zero, Vector3.Up), Matrix.CreatePerspective(1.2f, 0.9f, 1.0f, 1000.0f));
         //method for getting out textures
-        private void SetEffects(HeightmapComponent hmComp)
+        private void SetEffects(HeightmapComponent hmComp, CameraComponent camCom)
         {
             hmComp.Effect.Texture = hmComp.HeightMapTexture;
             hmComp.Effect.FogEnabled = false;
 
             //ändra till false om man vill se trianglarna
             hmComp.Effect.TextureEnabled = true;
+            hmComp.Effect.View = Matrix.CreateLookAt(new Vector3(-100, 0, 0), Vector3.Zero, Vector3.Up);
+            hmComp.Effect.Projection = Matrix.CreatePerspective(1.2f, 0.9f, 1.0f, 1000.0f);
+            hmComp.Effect.World = hmComp.World;
             //// draw those triangles
             //RasterizerState state = new RasterizerState();
             //state.FillMode = FillMode.WireFrame;
@@ -87,9 +91,10 @@ namespace Series3D1.Systems
         {
             Entity hmEntity = ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities());
             HeightmapComponent hmComp = ComponentManager.Instance.GetEntityComponent<HeightmapComponent>(hmEntity);
+            CameraComponent camComp = ComponentManager.Instance.GetEntityComponent<CameraComponent>(hmEntity);
 
             hmComp.Effect.CurrentTechnique.Passes[0].Apply();
-            SetEffects(hmComp);
+            SetEffects(hmComp, camComp);
             foreach (EffectPass pass in hmComp.Effect.CurrentTechnique.Passes)
             {
 
@@ -107,11 +112,13 @@ namespace Series3D1.Systems
             Entity hmEntity = ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities());
             HeightmapComponent hmComp = ComponentManager.Instance.GetEntityComponent<HeightmapComponent>(hmEntity);
             TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(hmEntity);
+            CameraComponent camComp = ComponentManager.Instance.GetEntityComponent<CameraComponent>(hmEntity);
+
             hmComp.World = Matrix.CreateTranslation(transComp.Position);
             SetHeights(hmComp);
             SetVertices(hmComp);
             SetIndices(hmComp);
-            SetEffects(hmComp);
+            SetEffects(hmComp, camComp);
         }
 
         public int Order()
