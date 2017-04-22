@@ -12,6 +12,7 @@ namespace Series3D1.Systems
 {
     class TransformSystem : IUpdate
     {
+        float rot = 0.6f;
         public int Order()
         {
             throw new NotImplementedException();
@@ -20,40 +21,24 @@ namespace Series3D1.Systems
         void IUpdate.Update(GameTime gametime)
         {
             List<Entity> entities = SceneManager.Instance.GetActiveSceneEntities();
-            foreach (Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<CameraComponent>())
+            foreach (Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<TransformComponent>())
             {
-                CameraComponent camComp = ComponentManager.Instance.GetEntityComponent<CameraComponent>(ent);
                 TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
-
-                camComp.View = camComp.View * Matrix.CreateRotationX(transComp.Rotation.X) * Matrix.CreateRotationY(transComp.Rotation.Y) * Matrix.CreateTranslation(transComp.Position);
+                transComp.SRTMatrix = Matrix.CreateScale(transComp.Scaling) * Matrix.CreateFromQuaternion(transComp.QRotation) * Matrix.CreateTranslation(transComp.Position);
             }
             foreach(Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<ModelComponent>())
             {
                 ModelComponent modelComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ent);
                 TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
-                transComp.Rotation = new Vector3(0, transComp.Rotation.Y + .6f, 0);
+
+                rot += 0.6f;
                 //kroppen
                 modelComp.Model.Bones[0].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[0].Transform.Translation);
                 //rotera stora propellern
-                modelComp.Model.Bones[1].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(transComp.Rotation.Y);
+                modelComp.Model.Bones[1].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(rot);
                 //lilla
-                modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * modelComp.Model.Bones[3].Transform;
-                
+                modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * modelComp.Model.Bones[3].Transform;   
             }
-            //foreach(Entity ent in entities)
-            //{
-            //    TransformComponent tc = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
-            //    ModelComponent mc = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ent);
-            //    CameraComponent cc = ComponentManager.Instance.GetEntityComponent<CameraComponent>(ent);
-            //    ComponentManager.Instance.GetAllEntitiesWithCertainComp<Camera>
-            //    if (tc == null || mc == null)
-            //        continue;
-
-
-
-            //}
-            //rotera stora propellern
-
         }
     }
 }

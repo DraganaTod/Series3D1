@@ -66,21 +66,21 @@ namespace Series3D1
             SceneManager.Instance.AddEntityToScene("game", chopper);
             ComponentManager.Instance.AddComponentToEntity(chopper, new TagComponent("chopper"));
             ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper")));
-            ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(), Vector3.Zero, new Vector3()));
+            ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(-5, 0, 10), new Quaternion(), new Vector3(0.5f, 0.5f, 0.5f)));
 
             Entity camera = new Entity();
             Vector3 pos = new Vector3(-100, 0, 0);
             SceneManager.Instance.AddEntityToScene("game", camera);
             ComponentManager.Instance.AddComponentToEntity(camera, new TagComponent("camera"));
             ComponentManager.Instance.AddComponentToEntity(camera, new CameraComponent(
-                Matrix.CreateLookAt(new Vector3(-100, 0, 0), Vector3.Zero, Vector3.Up), Matrix.CreatePerspective(1.2f, 0.9f, 1.0f, 1000.0f)));
-            ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent(pos, new Vector3(2, 2, 2) * 0.02f, new Vector3()));
+                Matrix.CreateLookAt(new Vector3(-100, 0, 0), Vector3.Zero, Vector3.Up), Matrix.CreatePerspective(1.2f, 0.9f, 1.0f, 1000.0f), new Vector3(0, 1, 10)));
+            ComponentManager.Instance.AddComponentToEntity(camera, new TransformComponent(pos, Quaternion.CreateFromYawPitchRoll(0.02f, 0.02f, 0.02f), new Vector3()));
 
             Entity heightmap = new Entity();
             SceneManager.Instance.AddEntityToScene("game", heightmap);
             ComponentManager.Instance.AddComponentToEntity(heightmap, new TagComponent("heightmap"));
             ComponentManager.Instance.AddComponentToEntity(heightmap, new HeightmapComponent(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_canyon_d"), graphics.GraphicsDevice));
-            ComponentManager.Instance.AddComponentToEntity(heightmap, new TransformComponent(new Vector3(0, -100, 256), new Vector3(), new Vector3()));
+            ComponentManager.Instance.AddComponentToEntity(heightmap, new TransformComponent(new Vector3(0, -100, 256), Quaternion.Identity, new Vector3()));
             SceneManager.Instance.ActiveScene = "game";
             SystemManager.Instance.ActiveCategory = "game";
 
