@@ -19,6 +19,7 @@ namespace Series3D1.Components
         public BasicEffect Effect { get; set; }
         public Matrix World { get; set; }
         public float[,] heightMapData { get; set; }
+        public GraphicsDevice device { get; set; }
 
         public HeightmapComponent(Texture2D heightmap, Texture2D heightmapT, GraphicsDevice gd)
         {
@@ -26,7 +27,8 @@ namespace Series3D1.Components
             HeightMapTexture = heightmapT;
             Width = heightmap.Width;
             Height = heightmap.Height;
-            Effect = new BasicEffect(gd);
+            device = gd;
+            Effect = new BasicEffect(device);
         }
     }
 }

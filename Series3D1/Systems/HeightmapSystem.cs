@@ -13,7 +13,9 @@ namespace Series3D1.Systems
 {
     class HeightmapSystem : ILoadContent, IDraw
     {
-
+        VertexBuffer vertexBuffer;
+        IndexBuffer indexBuffer;
+       
         //heithMap
         //array to read heightMap data
         
@@ -102,8 +104,10 @@ namespace Series3D1.Systems
 
                 //pass.Begin();
                 pass.Apply();
-                spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, hmComp.Vertices, 0, hmComp.Vertices.Length, hmComp.Indices, 0, hmComp.Indices.Length / 3);
-
+                //spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, hmComp.Vertices, 0, hmComp.Vertices.Length, hmComp.Indices, 0, hmComp.Indices.Length / 3);
+                spriteBatch.GraphicsDevice.Indices = indexBuffer;
+                spriteBatch.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+                spriteBatch.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, hmComp.Vertices.Length, 0, hmComp.Indices.Length / 3);
 
                 // pass.End();
             }
@@ -121,6 +125,21 @@ namespace Series3D1.Systems
             SetVertices(hmComp);
             SetIndices(hmComp);
             //SetEffects(hmComp, camComp);
+             CopyToBuffer(hmComp.device, hmComp);
+            
+        }
+        /// <summary>
+        /// Method for setting up vertex and index buffers
+        /// </summary>
+        /// <param name="device"></param>
+        /// <param name="hmComp"></param>
+        private void CopyToBuffer(GraphicsDevice device, HeightmapComponent hmComp)
+        {
+            vertexBuffer = new VertexBuffer(device, typeof(VertexPositionTexture), hmComp.Vertices.Length, BufferUsage.WriteOnly);
+            vertexBuffer.SetData<VertexPositionTexture>(hmComp.Vertices);
+
+            indexBuffer = new IndexBuffer(device, typeof(int), hmComp.Indices.Length, BufferUsage.WriteOnly);
+            indexBuffer.SetData(hmComp.Indices);
         }
 
         public int Order()
