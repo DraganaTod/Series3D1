@@ -14,12 +14,6 @@ namespace Series3D1.Systems
 {
     class CameraSystem : IUpdate
     {
-        Vector3 tempMovement = Vector3.Zero;
-        Vector3 tempRotation = Vector3.Zero;
-
-        
-       
-
         public CameraSystem()
         {
 
@@ -33,7 +27,6 @@ namespace Series3D1.Systems
             TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ComponentManager.Instance.GetEntityWithTag("camera", SceneManager.Instance.GetActiveSceneEntities()));
             TransformComponent cTransComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities()));
             // Vector3 cameraPosition = mc.chopperPosition; // new Vector3(-2f, 0.1f, -0.1f);
-            Vector3 camerUp = new Vector3(0, 1, 0);
 
             //transComp.Position = Vector3.Transform(transComp.Position, Matrix.CreateFromQuaternion(transComp.QRotation));
             transComp.Position = cTransComp.Position + camcomp.CameraOffSet;

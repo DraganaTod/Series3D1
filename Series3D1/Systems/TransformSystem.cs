@@ -24,6 +24,7 @@ namespace Series3D1.Systems
             foreach (Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<TransformComponent>())
             {
                 TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
+
                 transComp.SRTMatrix = Matrix.CreateScale(transComp.Scaling) * Matrix.CreateFromQuaternion(transComp.QRotation) * Matrix.CreateTranslation(transComp.Position);
             }
             foreach(Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<ModelComponent>())

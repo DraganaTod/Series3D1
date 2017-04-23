@@ -66,7 +66,7 @@ namespace Series3D1
             SceneManager.Instance.AddEntityToScene("game", chopper);
             ComponentManager.Instance.AddComponentToEntity(chopper, new TagComponent("chopper"));
             ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper")));
-            ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(-5, 0, 10), new Quaternion(), new Vector3(0.5f, 0.5f, 0.5f)));
+            ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(-5, 0, 10), Quaternion.Identity, new Vector3(0.5f, 0.5f, 0.5f)));
 
             Entity camera = new Entity();
             Vector3 pos = new Vector3(-100, 0, 0);

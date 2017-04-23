@@ -56,22 +56,22 @@ namespace Series3D1.Systems
                         transComp.Position += new Vector3(0, 0, -2f);
                         break;
                     case Keys.Q:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(-0.02f, 0, 0);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Up, 0.02f);
                         break;
                     case Keys.E:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(0.02f, 0, 0);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Up, -0.02f);
                         break;
                     case Keys.G:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(0, -0.02f, 0);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Right, 0.02f);
                         break;
                     case Keys.T:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(0, 0.02f, 0);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Right, -0.02f);
                         break;
                     case Keys.C:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(0, 0, -0.02f);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Forward, -0.02f);
                         break;
                     case Keys.V:
-                        transComp.QRotation *= Quaternion.CreateFromYawPitchRoll(0, 0, 0.02f);
+                        transComp.QRotation *= Quaternion.CreateFromAxisAngle(Vector3.Forward, 0.02f);
                         break;
                     default:
                         break;
