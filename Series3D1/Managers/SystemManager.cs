@@ -19,7 +19,8 @@ namespace Series3D1.Managers
 
         private static SystemManager instance;
         private SystemManager() { }
-
+        
+        //singelton 
         public static SystemManager Instance
         {
             get
@@ -29,7 +30,12 @@ namespace Series3D1.Managers
                 return instance;
             }
         }
-
+        /// <summary>
+        /// Registers a system to depending on if its a draw, update or loadcontent system,
+        /// this function adds it to its corresponding system dictionary
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="system"></param>
         public void RegisterSystem(string category, ISystem system)
         {
             if (system is IDraw)
@@ -59,7 +65,9 @@ namespace Series3D1.Managers
                 ILoadContentDict[category].Add(system.GetType(), system);
             }
         }
-
+        /// <summary>
+        /// runs all the loadcontent systems
+        /// </summary>
         public void RunLoadContentSystems()
         {
             if (IUpdateDict.ContainsKey(ActiveCategory))
@@ -70,7 +78,11 @@ namespace Series3D1.Managers
                 }
             }
         }
-
+        /// <summary>
+        /// runs all the draw systems
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="gameTime"></param>
         public void RunDrawSystems(SpriteBatch spriteBatch, GameTime gameTime)
         {
             if (IDrawDict.ContainsKey(ActiveCategory))
@@ -81,7 +93,10 @@ namespace Series3D1.Managers
                 }
             }
         }
-
+        /// <summary>
+        /// runs all the update systems
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void RunUpdateSystems(GameTime gameTime)
         {
             if (IUpdateDict.ContainsKey(ActiveCategory))

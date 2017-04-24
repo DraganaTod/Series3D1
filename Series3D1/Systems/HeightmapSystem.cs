@@ -77,6 +77,10 @@ namespace Series3D1.Systems
                 // graphicsDevice.VertexDeclaration = new VertexDeclaration(graphicsDevice, VertexPositionTexture.VertexElements);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hmComp"></param>
         public void SetHeights(HeightmapComponent hmComp)
         {
             Color[] greyValues = new Color[hmComp.Width * hmComp.Height];
@@ -91,7 +95,11 @@ namespace Series3D1.Systems
                 }
             }
         }
-
+        /// <summary>
+        /// draws the heightmap
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="gameTime"></param>
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             Entity hmEntity = ComponentManager.Instance.GetEntityWithTag("heightmap", SceneManager.Instance.GetActiveSceneEntities());

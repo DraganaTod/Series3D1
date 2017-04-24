@@ -61,6 +61,10 @@ namespace Series3D1
             //load heightMap and heightMapTexture to create landscape
             base.LoadContent();
         }
+        /// <summary>
+        /// Adds all the entities and components to the engine.
+        /// Also sets the name of the scene and sets it active
+        /// </summary>
         public void AddEntitiesAndComponents()
         {
             Entity chopper = new Entity();

@@ -26,6 +26,11 @@ namespace Series3D1.Systems
             modComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(Chopent);
             cameraComponent = ComponentManager.Instance.GetEntityComponent<CameraComponent>(Cament);
         }
+        /// <summary>
+        /// changes rotate and position to the choppers transform component according
+        /// to which key is pressed
+        /// </summary>
+        /// <param name="gameTime"></param>
         public void Movement(GameTime gameTime)
         {
             float speed = gameTime.ElapsedGameTime.Milliseconds / 500.0f * 1.0f;
@@ -97,6 +102,12 @@ namespace Series3D1.Systems
             }
             return radius;
         }
+        /// <summary>
+        /// Draws the models in the world
+        /// </summary>
+        /// <param name="mc"></param>
+        /// <param name="gameTime"></param>
+        /// <param name="spriteBatch"></param>
         public void DrawModel(ModelComponent mc, GameTime gameTime, SpriteBatch spriteBatch)
         {
             Matrix[] chopperTransforms = new Matrix[mc.Model.Bones.Count];

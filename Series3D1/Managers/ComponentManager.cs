@@ -15,6 +15,7 @@ namespace Series3D1.Managers
 
         private static ComponentManager instance;
 
+        //singelton
         public static ComponentManager Instance
         {
             get
@@ -24,6 +25,11 @@ namespace Series3D1.Managers
                 return instance;
             }
         }
+        /// <summary>
+        /// adds component to the given entity
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="component"></param>
         public void AddComponentToEntity(Entity entity, IComponent component)
         {
             Type type = component.GetType();
@@ -33,7 +39,11 @@ namespace Series3D1.Managers
             }
             components[type][entity] = component;
         }
-
+        /// <summary>
+        /// gets all the entities with given component type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<Entity> GetAllEntitiesWithCertainComp<T>() where T : class, IComponent
         {
             List<Entity> temp = new List<Entity>();
@@ -46,7 +56,12 @@ namespace Series3D1.Managers
             }
             return temp;
         }
-
+        /// <summary>
+        /// get the component with given component type from the given entity
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         public T GetEntityComponent<T>(Entity entity) where T : class, IComponent
         {
             Type type = typeof(T);
@@ -56,6 +71,11 @@ namespace Series3D1.Managers
                 return (T)components[type][entity];
             return null;
         }
+        /// <summary>
+        /// gets all the components with given component type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<T> GetAllSpecComponents<T>() where T : class, IComponent
         {
             List<T> temp = new List<T>();
@@ -68,7 +88,12 @@ namespace Series3D1.Managers
             }
             return temp;
         }
-
+        /// <summary>
+        /// gets an entity with a given tag from the given entities
+        /// </summary>
+        /// <param name="tagName"></param>
+        /// <param name="entities"></param>
+        /// <returns></returns>
         public Entity GetEntityWithTag(String tagName, List<Entity> entities)
         {
             foreach (Entity e in entities)

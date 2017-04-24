@@ -19,7 +19,11 @@ namespace Series3D1.Systems
 
         }
 
-        // position the camera behind the chopper
+        /// <summary>
+        /// Updating camera position according to the choppers position and the cameraoffset 
+        /// and setting the camera components view and projection
+        /// </summary>
+        /// <param name="gametime"></param>
         public void Update(GameTime gametime)
         {
             ModelComponent mc = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ComponentManager.Instance.GetEntityWithTag("chopper", SceneManager.Instance.GetActiveSceneEntities()));

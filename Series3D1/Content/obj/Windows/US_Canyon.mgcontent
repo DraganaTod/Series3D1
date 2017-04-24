@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Dragana/Source/Repos/Series3D1/Series3D1/Content/US_Canyon.png</SourceFile>
-  <SourceTime>2017-04-21T10:08:30.5695569+02:00</SourceTime>
-  <DestFile>C:/Users/Dragana/Source/Repos/Series3D1/Series3D1/Content/bin/Windows/US_Canyon.xnb</DestFile>
-  <DestTime>2017-04-23T16:40:55.7097509+02:00</DestTime>
+  <SourceFile>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/US_Canyon.png</SourceFile>
+  <SourceTime>2017-04-04T18:18:45.5292624+02:00</SourceTime>
+  <DestFile>D:/Plugg_År_3/Datorgrafik/Labbar/Series3D1/Series3D1/Content/bin/Windows/US_Canyon.xnb</DestFile>
+  <DestTime>2017-04-24T22:17:55.4543339+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
+  <ImporterTime>2017-03-01T16:05:36+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2016-03-30T08:36:08+02:00</ProcessorTime>
+  <ProcessorTime>2017-03-01T16:05:36+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>
