@@ -147,7 +147,7 @@ namespace Series3D1.Systems
 
         public void Update(GameTime gametime)
         {
-            Movement(gametime);
+           // Movement(gametime);
         }
     }
 }

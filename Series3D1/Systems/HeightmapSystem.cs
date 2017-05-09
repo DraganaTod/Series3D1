@@ -11,6 +11,25 @@ using Series3D1.Entities;
 
 namespace Series3D1.Systems
 {
+    public struct MyOwnVertexFormat
+    {
+        public Vector3 position;
+        public Vector2 texCoord;
+        public Vector3 normal;
+        public MyOwnVertexFormat(Vector3 position, Vector2 texCoord, Vector3 normal)
+        {
+            this.position = position;
+            this.texCoord = texCoord;
+            this.normal = normal;
+
+        }
+        public readonly static VertexDeclaration VertexDeclaration = new VertexDeclaration
+             (
+                 new VertexElement(0, VertexElementFormat.Vector3, VertexElementUsage.Position, 0),
+                 new VertexElement(sizeof(float) * 3, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0),
+                 new VertexElement(sizeof(float) * (3 + 2), VertexElementFormat.Vector3, VertexElementUsage.Normal, 0));
+
+    }
     class HeightmapSystem : ILoadContent, IDraw
     {
         VertexBuffer vertexBuffer;
@@ -61,6 +80,32 @@ namespace Series3D1.Systems
                     number += 6;
                 }
         }
+        public void setVer(HeightmapComponent hc, SpriteBatch sp)
+        {
+            MyOwnVertexFormat[] vertices = new MyOwnVertexFormat[18];
+
+            vertices[0] = new MyOwnVertexFormat(new Vector3(-20, 0, 10), new Vector2(-0.25f, 25.0f), new Vector3(0, 1, 0));
+            vertices[1] = new MyOwnVertexFormat(new Vector3(-20, 0, -100), new Vector2(-0.25f, 0.0f), new Vector3(0, 1, 0));
+            vertices[2] = new MyOwnVertexFormat(new Vector3(2, 0, 10), new Vector2(0.25f, 25.0f), new Vector3(0, 1, 0));
+            vertices[3] = new MyOwnVertexFormat(new Vector3(2, 0, -100), new Vector2(0.25f, 0.0f), new Vector3(0, 1, 0));
+            vertices[4] = new MyOwnVertexFormat(new Vector3(2, 0, 10), new Vector2(0.25f, 25.0f), new Vector3(-1, 0, 0));
+            vertices[5] = new MyOwnVertexFormat(new Vector3(2, 0, -100), new Vector2(0.25f, 0.0f), new Vector3(-1, 0, 0));
+            vertices[6] = new MyOwnVertexFormat(new Vector3(2, 1, 10), new Vector2(0.375f, 25.0f), new Vector3(-1, 0, 0));
+            vertices[7] = new MyOwnVertexFormat(new Vector3(2, 1, -100), new Vector2(0.375f, 0.0f), new Vector3(-1, 0, 0));
+            vertices[8] = new MyOwnVertexFormat(new Vector3(2, 1, 10), new Vector2(0.375f, 25.0f), new Vector3(0, 1, 0));
+            vertices[9] = new MyOwnVertexFormat(new Vector3(2, 1, -100), new Vector2(0.375f, 0.0f), new Vector3(0, 1, 0));
+            vertices[10] = new MyOwnVertexFormat(new Vector3(3, 1, 10), new Vector2(0.5f, 25.0f), new Vector3(0, 1, 0));
+            vertices[11] = new MyOwnVertexFormat(new Vector3(3, 1, -100), new Vector2(0.5f, 0.0f), new Vector3(0, 1, 0));
+            vertices[12] = new MyOwnVertexFormat(new Vector3(13, 1, 10), new Vector2(0.75f, 25.0f), new Vector3(0, 1, 0));
+            vertices[13] = new MyOwnVertexFormat(new Vector3(13, 1, -100), new Vector2(0.75f, 0.0f), new Vector3(0, 1, 0));
+            vertices[14] = new MyOwnVertexFormat(new Vector3(13, 1, 10), new Vector2(0.75f, 25.0f), new Vector3(-1, 0, 0));
+            vertices[15] = new MyOwnVertexFormat(new Vector3(13, 1, -100), new Vector2(0.75f, 0.0f), new Vector3(-1, 0, 0));
+            vertices[16] = new MyOwnVertexFormat(new Vector3(13, 21, 10), new Vector2(1.25f, 25.0f), new Vector3(-1, 0, 0));
+            vertices[17] = new MyOwnVertexFormat(new Vector3(13, 21, -100), new Vector2(1.25f, 0.0f), new Vector3(-1, 0, 0));
+
+            vertexBuffer = new VertexBuffer(sp.GraphicsDevice, MyOwnVertexFormat.VertexDeclaration, vertices.Length, BufferUsage.WriteOnly);
+            vertexBuffer.SetData(vertices);
+        }
 
         private void SetVertices(HeightmapComponent hmComp)
         {
@@ -91,7 +136,8 @@ namespace Series3D1.Systems
             {
                 for (int y = 0; y < hmComp.Height; y++)
                 {
-                    hmComp.heightMapData[x, y] = greyValues[x + y * hmComp.Width].G / 3.1f;
+                    hmComp.heightMapData[x, y] = 0;
+                    //hmComp.heightMapData[x, y] = greyValues[x + y * hmComp.Width].G / 3.1f;
                 }
             }
         }
@@ -112,10 +158,10 @@ namespace Series3D1.Systems
 
                 //pass.Begin();
                 pass.Apply();
-                //spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, hmComp.Vertices, 0, hmComp.Vertices.Length, hmComp.Indices, 0, hmComp.Indices.Length / 3);
-                spriteBatch.GraphicsDevice.Indices = indexBuffer;
+                spriteBatch.GraphicsDevice.DrawUserIndexedPrimitives<VertexPositionTexture>(PrimitiveType.TriangleList, hmComp.Vertices, 0, hmComp.Vertices.Length, hmComp.Indices, 0, hmComp.Indices.Length / 3);
+                //spriteBatch.GraphicsDevice.Indices = indexBuffer;
                 spriteBatch.GraphicsDevice.SetVertexBuffer(vertexBuffer);
-                spriteBatch.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, hmComp.Vertices.Length, 0, hmComp.Indices.Length / 3);
+                //spriteBatch.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, hmComp.Vertices.Length, 0, hmComp.Indices.Length / 3);
 
                 // pass.End();
             }
@@ -152,7 +198,7 @@ namespace Series3D1.Systems
 
         public int Order()
         {
-            return 1;
+            return 6;
         }
     }
 }

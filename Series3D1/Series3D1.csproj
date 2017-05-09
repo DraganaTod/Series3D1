@@ -42,6 +42,7 @@
     <Compile Include="Components\HeightmapComponent.cs" />
     <Compile Include="Components\IComponent.cs" />
     <Compile Include="Components\ModelComponent.cs" />
+    <Compile Include="Components\SkyBoxComponent.cs" />
     <Compile Include="Components\TagComponent.cs" />
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Systems\ISystem.cs" />
     <Compile Include="Systems\IUpdate.cs" />
     <Compile Include="Systems\ModelSystem.cs" />
+    <Compile Include="Systems\SkyBoxSystem.cs" />
     <Compile Include="Systems\TransformSystem.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +71,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AllEff.fx" />
+    <Content Include="Content\Diffuse.fx" />
+    <Content Include="Content\Shadow.fx" />
+    <Content Include="Content\TextureShader.fx" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

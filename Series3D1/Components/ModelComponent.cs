@@ -20,8 +20,9 @@ namespace Series3D1.Components
         public BasicEffect Effect { get; set; }
         
 
-        public ModelComponent(Model model)
+        public ModelComponent(Model model, Vector3 pos)
         {
+            chopperPosition = pos;
             Model = model;
            // Effect = new BasicEffect(gd);
             

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/Skybox.fx</SourceFile>
+  <SourceTime>2017-04-28T16:56:15.8239438+02:00</SourceTime>
+  <DestFile>C:/Users/Dragana/Source/Repos/Series3D12/Series3D1/Content/bin/Windows/Skybox.xnb</DestFile>
+  <DestTime>2017-05-09T16:59:57.2078549+02:00</DestTime>
+  <Importer>EffectImporter</Importer>
+  <ImporterTime>2016-03-30T08:36:08+02:00</ImporterTime>
+  <Processor>EffectProcessor</Processor>
+  <ProcessorTime>2016-03-30T08:36:08+02:00</ProcessorTime>
+  <Parameters>
+    <Key>DebugMode</Key>
+    <Value>Auto</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

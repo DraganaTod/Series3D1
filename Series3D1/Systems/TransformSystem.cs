@@ -27,19 +27,19 @@ namespace Series3D1.Systems
 
                 transComp.SRTMatrix = Matrix.CreateScale(transComp.Scaling) * Matrix.CreateFromQuaternion(transComp.QRotation) * Matrix.CreateTranslation(transComp.Position);
             }
-            foreach(Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<ModelComponent>())
-            {
-                ModelComponent modelComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ent);
-                TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
+            //foreach(Entity ent in ComponentManager.Instance.GetAllEntitiesWithCertainComp<ModelComponent>())
+            //{
+            //    ModelComponent modelComp = ComponentManager.Instance.GetEntityComponent<ModelComponent>(ent);
+            //    TransformComponent transComp = ComponentManager.Instance.GetEntityComponent<TransformComponent>(ent);
 
-                rot += 0.6f;
-                //kroppen
-                modelComp.Model.Bones[0].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[0].Transform.Translation);
-                //rotera stora propellern
-                modelComp.Model.Bones[1].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(rot);
-                //lilla
-                modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * modelComp.Model.Bones[3].Transform;   
-            }
+            //    rot += 0.6f;
+            //    //kroppen
+            //    modelComp.Model.Bones[0].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[0].Transform.Translation);
+            //    //rotera stora propellern
+            //    modelComp.Model.Bones[1].Transform = Matrix.CreateTranslation(modelComp.Model.Bones[1].Transform.Translation) * Matrix.CreateRotationY(rot);
+            //    //lilla
+            //    modelComp.Model.Bones[3].Transform = Matrix.CreateFromYawPitchRoll(5f, 0, 0) * modelComp.Model.Bones[3].Transform;   
+            //}
         }
     }
 }

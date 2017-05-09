@@ -44,6 +44,7 @@ namespace Series3D1
             SystemManager.Instance.RegisterSystem("game", new CameraSystem());
             SystemManager.Instance.RegisterSystem("game", new ModelSystem());
             SystemManager.Instance.RegisterSystem("game", new HeightmapSystem());
+           // SystemManager.Instance.RegisterSystem("game", new SkyBoxSystem());
 
             base.Initialize();
         }
@@ -70,11 +71,23 @@ namespace Series3D1
             Entity chopper = new Entity();
             SceneManager.Instance.AddEntityToScene("game", chopper);
             ComponentManager.Instance.AddComponentToEntity(chopper, new TagComponent("chopper"));
-            ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper")));
+            ComponentManager.Instance.AddComponentToEntity(chopper, new ModelComponent(Content.Load<Model>("Chopper"), new Vector3(-5, 0, 10)));
             ComponentManager.Instance.AddComponentToEntity(chopper, new TransformComponent(new Vector3(-5, 0, 10), Quaternion.Identity, new Vector3(0.5f, 0.5f, 0.5f)));
 
+            Entity Sky = new Entity();
+            SceneManager.Instance.AddEntityToScene("game", Sky);
+            ComponentManager.Instance.AddComponentToEntity(Sky, new TagComponent("Sky"));
+            ComponentManager.Instance.AddComponentToEntity(Sky, new SkyboxComponent(Content.Load<Model>("cube"), Content.Load<Effect>("Skybox"), Content.Load<TextureCube>("Sunset")));
+
+            //Entity hangar = new Entity();
+            //SceneManager.Instance.AddEntityToScene("game", hangar);
+            //ComponentManager.Instance.AddComponentToEntity(hangar, new TagComponent("hangar"));
+            //ComponentManager.Instance.AddComponentToEntity(hangar, new ModelComponent(Content.Load<Model>("moffett-old-building-b"), new Vector3(5, 5, 10)));
+            //ComponentManager.Instance.AddComponentToEntity(hangar, new TransformComponent(new Vector3(5, 0, 10), Quaternion.Identity, new Vector3(10f, 10f, 10f)));
+
+
             Entity camera = new Entity();
-            Vector3 pos = new Vector3(-100, 0, 0);
+            Vector3 pos = new Vector3(-10, 0, 0);
             SceneManager.Instance.AddEntityToScene("game", camera);
             ComponentManager.Instance.AddComponentToEntity(camera, new TagComponent("camera"));
             ComponentManager.Instance.AddComponentToEntity(camera, new CameraComponent(
@@ -85,7 +98,7 @@ namespace Series3D1
             SceneManager.Instance.AddEntityToScene("game", heightmap);
             ComponentManager.Instance.AddComponentToEntity(heightmap, new TagComponent("heightmap"));
             ComponentManager.Instance.AddComponentToEntity(heightmap, new HeightmapComponent(Content.Load<Texture2D>("US_Canyon"), Content.Load<Texture2D>("mntn_canyon_d"), graphics.GraphicsDevice));
-            ComponentManager.Instance.AddComponentToEntity(heightmap, new TransformComponent(new Vector3(0, -100, 256), Quaternion.Identity, new Vector3()));
+            ComponentManager.Instance.AddComponentToEntity(heightmap, new TransformComponent(new Vector3(-100, -100, 256), Quaternion.Identity, new Vector3()));
             SceneManager.Instance.ActiveScene = "game";
             SystemManager.Instance.ActiveCategory = "game";
 

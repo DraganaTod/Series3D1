@@ -14,6 +14,8 @@ namespace Series3D1.Components
         public Vector3 Movement { get; set; }
         public Vector3 Scaling { get; set; }
         public Matrix SRTMatrix { get; set; }
+        public Matrix CalcMatrix { get; set; }
+        public Quaternion QRot { get; set; }
         public Quaternion QRotation = Quaternion.Identity;
 
         public TransformComponent(Vector3 pos, Quaternion rot, Vector3 scal)
